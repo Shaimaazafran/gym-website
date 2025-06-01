@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>نادي الزعفران للياقة - Zafran Gym</title>
+
+  <style>
+    /* خطوط مشابهة لخط ماك (San Francisco) */
+    @font-face {
+      font-family: "SF Pro Text";
+      src: local("SF Pro Text"), local("San Francisco"), local("Segoe UI"), local("Roboto"), local("Helvetica Neue"), local("Arial"), sans-serif;
+    }
+
+    /* Reset and base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      direction: rtl;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #121212; /* اسود مريح */
+      color: #ddd;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* الهيدر + شريط التنقل */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #000000dd; /* اسود شفاف للعمق */
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+      font-weight: 600;
+    }
+
+    nav.navbar {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      color: #e2a200; /* لون أصفر داكن - مستوحى من الزعفران */
+      letter-spacing: 1.5px;
+      user-select: none;
+    }
+
+    ul.nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    ul.nav-links li a.nav-link {
+      font-size: 20px;
+      color: #ddd;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      cursor: pointer;
+    }
+
+    ul.nav-links li a.nav-link:hover,
+    ul.nav-links li a.nav-link.active {
+      background-color: #e2a200;
+      color: #121212;
+      box-shadow: 0 2px 10px rgba(226, 162, 0, 0.6);
+    }
+
+    /* قسم الهيرو */
+    section.hero {
+      position: relative;
+      height: 100vh;
+      background-image: url('https://b3327586.smushcdn.com/3327586/wp-content/uploads/2024/05/gb-botanica-gym-link-spaces-slough-1024x683.jpg?lossy=0&strip=1&webp=1');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.45);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      margin-top: 64px; /* ارتفاع الهيدر */
+    }
+
+    section.hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      color: #e2a200;
+    }
+
+    .hero-content h1 {
+      font-size: 52px;
+      font-weight: 900;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #e2a200aa;
+    }
+
+    .hero-content p {
+      font-size: 22px;
+      margin-bottom: 32px;
+      color: #fff;
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+    }
+
+    .btn {
+      background-color: #e2a200;
+      color: #121212;
+      font-weight: 700;
+      padding: 14px 36px;
+      font-size: 20px;
+      border-radius: 32px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(226, 162, 0, 0.8);
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #c79100;
+      box-shadow: 0 6px 20px rgba(199, 145, 0, 0.9);
+    }
+
+    /* قسم عن النادي */
+    section.about {
+      max-width: 1200px;
+      margin: 60px auto 80px;
+      padding: 40px 20px;
+      display: flex;
+      gap: 50px;
+      background-color: #181818;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px #e2a200aa;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .about-text {
+      flex: 1;
+      color: #ccc;
+      min-width: 320px;
+    }
+
+    .about-text h2 {
+      font-size: 44px;
+      margin-bottom: 20px;
+      color: #e2a200;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .about-text p {
+      font-size: 19px;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    .about-image {
+      flex: 1;
+      min-width: 320px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 28px #e2a200bb;
+      transition: transform 0.3s ease;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+    }
+
+    .about-image:hover {
+      transform: scale(1.05);
+    }
+
+    /* قسم البرامج */
+    section.programs {
+      max-width: 1200px;
+      margin: 0 auto 80px;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    section.programs h2 {
+      font-size: 40px;
+      color: #e2a200;
+      font-weight: 900;
+      margin-bottom: 40px;
+      letter-spacing: 1px;
+    }
+
+    .program-cards {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .program-card {
+      background-color: #222;
+      padding: 30px 20px;
+      border-radius: 14px;
+      width: 300px;
+      box-shadow: 0 4px 20px #e2a200aa;
+      transition: transform 0.3s ease;
+      color: #eee;
+    }
+
+    .program-card:hover {
+      transform: translateY(-12px);
+    }
+
+    .program-card h3 {
+      font-size: 26px;
+      margin-bottom: 15px;
+      font-weight: 900;
+      color: #e2a200;
+    }
+
+    .program-card p {
+      font-size: 17px;
+      margin-bottom: 22px;
+      line-height: 1.5;
+    }
+
+    .program-btn {
+      background-color: #e2a200;
+      color: #121212;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 17px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px #e2a200cc;
+      transition: background-color 0.3s ease;
+    }
+
+    .program-btn:hover {
+      background-color: #c79100;
+      box-shadow: 0 8px 22px #c79100cc;
+    }
+
+    /* قسم اتصل بنا */
+    section.contact {
+      max-width: 600px;
+      margin: 0 auto 80px;
+      padding: 40px 20px;
+      background-color: #181818;
+      border-radius: 16px;
+      box-shadow: 0 6px 22px #e2a200bb;
+    }
+
+    section.contact h2 {
+      font-size: 36px;
+      color: #e2a200;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
+    }
+
+    form#contact-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #ccc;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      background-color: #222;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 17px;
+      color: #eee;
+      margin-bottom: 22px;
+      resize: vertical;
+      transition: outline-color 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+      outline: 2.5px solid #e2a200;
+      background-color: #2b2b2b;
+    }
+
+    textarea {
+      min-height: 120px;
+    }
+
+    button[type="submit"] {
+      width: fit-content;
+      align-self: center;
+      padding: 14px 48px;
+      background-color: #e2a200;
+      color: #121212;
+      border: none;
+      border-radius: 32px;
+      font-weight: 700;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 6px 22px #e2a200cc;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #c79100;
+      box-shadow: 0 8px 28px #c79100cc;
+    }
+
+    /* الفوتر */
+    footer {
+      text-align: center;
+      padding: 24px 10px;
+      background-color: #111;
+      color: #555;
+      font-size: 15px;
+      border-top: 1px solid #222;
+      user-select: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .program-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      section.about {
+        flex-direction: column;
+        margin: 40px 10px 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="navbar" aria-label="شريط التنقل الرئيسي">
+    <div class="logo" tabindex="0" aria-label="شعار نادي الزعفران">Zafran For Fitness</div>
+    <ul class="nav-links" role="menubar">
+      <li role="none"><a href="#hero" class="nav-link active" role="menuitem" tabindex="0">الرئيسية</a></li>
+      <li role="none"><a href="#about" class="nav-link" role="menuitem" tabindex="-1">عن النادي</a></li>
+      <li role="none"><a href="#programs" class="nav-link" role="menuitem" tabindex="-1">البرامج</a></li>
+      <li role="none"><a href="#contact" class="nav-link" role="menuitem" tabindex="-1">اتصل بنا</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="hero" class="hero" aria-label="صورة رئيسية للنادي">
+  <div class="hero-content" role="banner">
+    <h1>نادي الزعفران للياقة البدنية</h1>
+    <p>تمتع بالقوة والصحة مع أفضل المدربين وأحدث المعدات.</p>
+    <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">انضم الآن</button>
+  </div>
+</section>
+
+<section id="about" class="about" aria-labelledby="about-title">
+  <div class="about-text">
+    <h2 id="about-title">عن نادي الزعفران</h2>
+    <p>نادي الزعفران هو وجهتك الأمثل لتحقيق أهداف اللياقة البدنية والصحة العامة، مع أفضل المدربين وأجواء مريحة ومجهزة بالكامل.</p>
+    <p>نحن نؤمن بأن الرياضة هي نمط حياة، ونوفر بيئة محفزة لكل من يريد تحسين نمط حياته بطريقة صحية وآمنة.</p>
+  </div>
+  <div class="about-image" aria-hidden="true">
+    <img src="https://i.pinimg.com/originals/b0/8a/96/b08a9613c1868c2d2a40187cc78ab5c6.gif" alt="صالة الألعاب الرياضية مع معدات حديثة" loading="lazy" />
+  </div>
+</section>
+
+<section id="programs" class="programs" aria-labelledby="programs-title">
+  <h2 id="programs-title">برامجنا</h2>
+  <div class="program-cards">
+    <div class="program-card" role="region" aria-label="برنامج بناء العضلات">
+      <h3>برنامج بناء العضلات</h3>
+      <p>تدريب مكثف لزيادة الكتلة العضلية وتحسين القوة باستخدام أحدث تقنيات التدريب.</p>
+      <button class="program-btn" onclick="alert('تم التسجيل في برنامج بناء العضلات!')">سجل الآن</button>
+    </div>
+    <div class="program-card" role="region" aria-label="برنامج التخسيس">
+      <h3>برنامج التخسيس</h3>
+      <p>خطط غذائية وتمارين متخصصة لحرق الدهون والوصول إلى الوزن المثالي بشكل صحي.</p>
+      <button class="program-btn" onclick="alert('تم التسجيل في برنامج التخسيس!')">سجل الآن</button>
+    </div>
+    <div class="program-card" role="region" aria-label="برنامج اللياقة العامة">
+      <h3>برنامج اللياقة العامة</h3>
+      <p>تمارين متنوعة لتحسين القدرة البدنية والمرونة، مناسبة لجميع الأعمار والمستويات.</p>
+      <button class="program-btn" onclick="alert('تم التسجيل في برنامج اللياقة العامة!')">سجل الآن</button>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact" aria-labelledby="contact-title">
+  <h2 id="contact-title">اتصل بنا</h2>
+  <form id="contact-form" aria-describedby="contact-desc" novalidate>
+    <label for="name">الاسم الكامل</label>
+    <input type="text" id="name" name="name" required aria-required="true" placeholder="ادخل اسمك الكامل" />
+
+    <label for="email">البريد الإلكتروني</label>
+    <input type="email" id="email" name="email" required aria-required="true" placeholder="ادخل بريدك الإلكتروني" />
+
+    <label for="message">رسالتك</label>
+    <textarea id="message" name="message" placeholder="اكتب رسالتك هنا..." rows="5"></textarea>
+
+    <button type="submit">إرسال</button>
+  </form>
+</section>
+
+<footer>
+  <p>© 2025 نادي الزعفران. جميع الحقوق محفوظة.</p>
+</footer>
+
+<script>
+  // تغيير حالة قائمة التنقل عند التمرير (تحديد القسم الحالي)
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  window.addEventListener("scroll", () => {
+    let current = "";
+    const scrollY = window.pageYOffset;
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 80;
+      const sectionHeight = section.offsetHeight;
+      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        current = section.getAttribute("id");
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove("active");
+      if (link.getAttribute("href") === "#" + current) {
+        link.classList.add("active");
+      }
+    });
+  });
+  </script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  // تهيئة EmailJS بمفتاحك العام
+  (function () {
+    emailjs.init("sLTuJHpX01kCYZtrZ"); // ← استبدلي YOUR_PUBLIC_KEY بمفتاحك
+  })();
+
+document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    emailjs.sendForm("service_xfvbw07", "template_t8c4nw8", this)
+      .then(function(response) {
+        alert("تم إرسال رسالتك بنجاح!");
+      }, function(error) {
+        alert("حدث خطأ أثناء الإرسال. الرجاء المحاولة لاحقاً.");
+        console.error(error);
+      });
+
+    this.reset();
+  });
+</script>
+</script>
+</body>
+</html>
